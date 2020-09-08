@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MLPlusAndroid</string>
+    <string name="sepal_length">Sepal Length:</string>
 </resources>
