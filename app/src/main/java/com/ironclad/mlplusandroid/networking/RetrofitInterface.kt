@@ -8,5 +8,5 @@ import retrofit2.http.Query
 interface RetrofitInterface {
 
     @GET("heartpredict/viz")
-    suspend fun getResponse(@Query("vizdata[]") vizdata: List<String>): Response<Data>
+    suspend fun getResponse(@Query("vizdata[]") vizdata: ArrayList<String>): Response<Data>
 }
