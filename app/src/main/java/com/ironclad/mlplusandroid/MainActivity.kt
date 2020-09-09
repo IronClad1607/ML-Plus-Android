@@ -1,7 +1,9 @@
 package com.ironclad.mlplusandroid
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -99,10 +101,12 @@ class MainActivity : AppCompatActivity() {
             exerciseAnginaValue = spinnerExercise.selectedItem.toString()
             stSegmentValue = spinnerSegment.selectedItem.toString()
             thalassemiaValue = spinnerDefect.selectedItem.toString()
-            val gender = radioGroup.checkedRadioButtonId.toString()
+            val genderID = radioGroup.checkedRadioButtonId
+            val gender = findViewById<RadioButton>(genderID)
+            Log.d("PUI", "${gender.text}")
 
             makeResponseData(
-                gender,
+                gender.text.toString(),
                 age,
                 bloodPressure,
                 cholesterol,
@@ -116,6 +120,8 @@ class MainActivity : AppCompatActivity() {
                 stSegmentValue,
                 thalassemiaValue
             )
+
+            Log.d("PUI", "$vizdata")
         }
 
     }
@@ -166,13 +172,13 @@ class MainActivity : AppCompatActivity() {
 
         when (electroCardiographicValue) {
             "Normal" -> {
-                vizdata.add("4")
+                vizdata.add("1")
             }
             "ST-T wave Abnormality" -> {
-                vizdata.add("4")
+                vizdata.add("2")
             }
             "Left Ventricular Hypertrophy" -> {
-                vizdata.add("4")
+                vizdata.add("3")
             }
         }
         vizdata.add(maxHeartRate)
