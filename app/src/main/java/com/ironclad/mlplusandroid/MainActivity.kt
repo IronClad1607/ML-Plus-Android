@@ -5,7 +5,10 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
+import com.ironclad.mlplusandroid.networking.RetrofitClient
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     val chestPain = arrayOf(
@@ -122,9 +125,29 @@ class MainActivity : AppCompatActivity() {
             )
 
             Log.d("PUI", "$vizdata")
+
+            GlobalScope.launch {
+                val data = getResponse(vizdata)
+                Log.d("PUI", data!!.isHeart)
+            }
         }
 
     }
+
+    private suspend fun getResponse(vizdata: ArrayList<String>): Data? {
+        Log.d("PUI", "API Call Started!")
+        val dataAPI = RetrofitClient.apiCall
+        val responseData = dataAPI.getResponse(vizdata)
+
+        return if (responseData.isSuccessful) {
+            Log.d("PUI", "API Call Success")
+            responseData.body()
+        } else {
+            Log.d("PUI", "API Call Not Success")
+            null
+        }
+    }
+
 
     private fun makeResponseData(
         gender: String,
