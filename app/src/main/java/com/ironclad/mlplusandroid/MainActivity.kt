@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         spinnerDefect.adapter = thalasseiaAdapter
 
         btnPredict.setOnClickListener {
+            vizdata.clear()
             val age = etAge.editText?.text.toString()
             val bloodPressure = etBloodPressure.editText?.text.toString()
             val cholesterol = etCholesterol.editText?.text.toString()
@@ -129,6 +130,9 @@ class MainActivity : AppCompatActivity() {
             GlobalScope.launch {
                 val data = getResponse(vizdata)
                 Log.d("PUI", data!!.isHeart)
+                runOnUiThread {
+                    tvAnswer.text = data.isHeart
+                }
             }
         }
 
