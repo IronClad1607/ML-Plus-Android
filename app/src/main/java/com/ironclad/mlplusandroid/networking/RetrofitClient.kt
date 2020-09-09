@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     private fun retrofit() = Retrofit.Builder()
-        .baseUrl("https://jsonplaceholder.typicode.com/")
+        .baseUrl("https://heart-prediction.herokuapp.com")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
